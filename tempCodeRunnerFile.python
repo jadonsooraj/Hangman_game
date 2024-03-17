@@ -1,5 +1,0 @@
-import string
-all_string=string.ascii_letters
-input_char="a"
-print(all_string.find(input_char))
-

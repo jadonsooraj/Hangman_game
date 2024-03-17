@@ -1,5 +1,6 @@
 from random_word_generator import pick_random_word
 
+# Function to change current word state depneding on the input from user
 def change_current_word_state(selected_word, input_char, current_word_state):
     modified_word_state=""
     
@@ -54,7 +55,7 @@ def play_game(attempt=5):
 
     
     for i in selected_word:
-        if i==" " or i=="a" or i=='e' or i=='i' or i=='o' or i=='u':
+        if i==" " or i=="a" or i=='e' or i=='i' or i=='o' or i=='u' or i=="\n":
             current_word_state+=i
         else:
             current_word_state+='_'
