@@ -1,9 +1,33 @@
 from random_word_generator import pick_random_word
+import string
+
+def string_input_converter(input_char1,selected_word):
+
+    str=string.ascii_letters
+    
+    # getting index of input_char in str
+    index=str.find(input_char1)
+
+    #If input_char and selected_word is same
+    if input_char1 in selected_word: 
+        return input_char1
+    
+    #If input_char and selected_word are different 
+    else:
+        #input_char is lowerCase and selected_word is UpperCase
+        if (index<26 and (str[index] in selected_word)):
+            return str[index+26]
+        
+        #input_char is UpperCase and selected_word is LowerCase
+        else:
+            (index>26 and (str[index] in selected_word))
+            return str[index-26]
+
 
 # Function to change current word state depneding on the input from user
 def change_current_word_state(selected_word, input_char, current_word_state):
     modified_word_state=""
-    
+
     for i in range(len(selected_word)):
         if current_word_state[i]=='_' and selected_word[i]==input_char:
             modified_word_state+=selected_word[i]
@@ -14,8 +38,9 @@ def change_current_word_state(selected_word, input_char, current_word_state):
 
 #If the Input character is in "selected_word", this function will update "current_word_state" or either it will decrease "attempts_remaining"
 def input_char_in_word(selected_word,input_char,current_word_state,attempts_remaining):
-    
-    # if the input char is in 'Selected_word', change 'current_word_state'
+
+    # if the 'input_char' is in 'Selected_word', change 'current_word_state'
+
     if input_char in selected_word:
         current_word_state=change_current_word_state(selected_word, input_char, current_word_state)
     
@@ -53,9 +78,9 @@ def play_game(attempt=5):
     # It will show present state of word
     current_word_state="" # string to store current word input from user
 
-    
+    #Hiding Consonants 
     for i in selected_word:
-        if i==" " or i=="a" or i=='e' or i=='i' or i=='o' or i=='u' or i=="\n":
+        if i==" " or i=="a" or i=='e' or i=='i' or i=='o' or i=='u' or i=="A" or i=='E' or i=='I' or i=='O' or i=='U' or i=="\n":
             current_word_state+=i
         else:
             current_word_state+='_'
@@ -65,8 +90,11 @@ def play_game(attempt=5):
     print_current_state(current_word_state,attempts_remaining)
 
     while True:
-        input_char=input("Guess the character: ")
+        input_char1=input("Guess the character: ")
         print(" ")
+
+        #This function will change case of input_char depending on Selected_word
+        input_char=string_input_converter(input_char1,selected_word)
 
         current_word_state,attempts_remaining=input_char_in_word(selected_word,input_char,current_word_state,attempts_remaining)
         print_current_state(current_word_state, attempts_remaining)
