@@ -67,6 +67,7 @@ def check_game_status(selected_word, current_word_state, attempts_remaining):
         return False
     if selected_word==current_word_state:
         print("Congratulations :)\nYOU WON")
+        print("The word was: {}".format(selected_word))
         return False
     return True
 
